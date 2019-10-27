@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomToast.showToast(MainActivity.this,"此功能同样未实现",Toast.LENGTH_SHORT);
+                //CustomToast.showToast(MainActivity.this,"此功能同样未实现",Toast.LENGTH_SHORT);
+                PostData.postData(String.valueOf(TestNum),MainActivity.this);
             }
         });
 
