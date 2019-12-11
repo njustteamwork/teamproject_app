@@ -1,5 +1,8 @@
 package com.example.myapplication.data;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.example.myapplication.data.model.LoggedInUser;
 
 import java.io.IOException;
@@ -10,7 +13,7 @@ import java.io.IOException;
 public class LoginDataSource {
 
     public Result<LoggedInUser> login(String username, String password) {
-
+        /*
         try {
             // TODO: handle loggedInUser authentication
             LoggedInUser fakeUser =
@@ -21,9 +24,21 @@ public class LoginDataSource {
         } catch (Exception e) {
             return new Result.Error(new IOException("Error logging in", e));
         }
+         */
+        try{
+            if(username.equals("test@test.com") && password.equals("testtest")){
+                LoggedInUser testUser = new LoggedInUser(java.util.UUID.randomUUID().toString(),username);
+                return new Result.Success<>(testUser);
+            }
+            else throw new Exception();
+        }catch (Exception e) {
+            return new Result.Error(new IOException("Error logging in", e));
+        }
     }
 
-    public void logout() {
+    public void logout(Context context) {
+        SharedPreferences userSP = context.getSharedPreferences("userData", Context.MODE_PRIVATE);
+        userSP.edit().clear().apply();
         // TODO: revoke authentication
     }
 }

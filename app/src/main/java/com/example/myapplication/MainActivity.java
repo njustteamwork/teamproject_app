@@ -70,8 +70,13 @@ public class MainActivity extends AppCompatActivity {
     public  boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.activity_1:
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intentLogin);
+                break;
+            case R.id.activity_2:
+                Intent intentSetting = new Intent(MainActivity.this,SettingsActivity.class);
+                startActivity(intentSetting);
+                break;
             default:
                 CustomToast.showToast(MainActivity.this,"click", Toast.LENGTH_SHORT);
                 break;

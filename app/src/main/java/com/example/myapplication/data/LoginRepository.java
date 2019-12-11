@@ -1,5 +1,8 @@
 package com.example.myapplication.data;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.example.myapplication.data.model.LoggedInUser;
 
 /**
@@ -32,22 +35,27 @@ public class LoginRepository {
         return user != null;
     }
 
-    public void logout() {
+    public void logout(Context context) {
         user = null;
-        dataSource.logout();
+        dataSource.logout(context);
     }
 
-    private void setLoggedInUser(LoggedInUser user) {
+    private void setLoggedInUser(LoggedInUser user, Context loginContext) {
         this.user = user;
+        SharedPreferences userSP = loginContext.getSharedPreferences("userData", Context.MODE_PRIVATE);
+        userSP.edit().clear().apply();
+        userSP.edit().putString("name",user.getDisplayName())
+                .putString("UUID",user.getUserId())
+                .apply();
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<LoggedInUser> login(String username, String password, Context loginContext) {
         // handle login
         Result<LoggedInUser> result = dataSource.login(username, password);
         if (result instanceof Result.Success) {
-            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
+            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData(),loginContext);
         }
         return result;
     }
