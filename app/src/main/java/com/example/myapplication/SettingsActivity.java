@@ -13,6 +13,10 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.myapplication.data.LoginDataSource;
 import com.example.myapplication.data.LoginRepository;
+import com.example.myapplication.filehelper.FileHelper;
+import com.example.myapplication.paillier.PaillierKeyGenerator;
+import com.example.myapplication.paillier.PaillierPrivateKey;
+import com.example.myapplication.paillier.PaillierPublicKey;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -31,6 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         Button clearUserData = findViewById(R.id.clearUserData);
         Button showUserData = findViewById(R.id.showUserData);
+        Button initKey = findViewById(R.id.initKey);
 
         clearUserData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +52,22 @@ public class SettingsActivity extends AppCompatActivity {
                 String name = userSP.getString("name",null);
                 String UUID = userSP.getString("UUID",null);
                 CustomToast.showToast(SettingsActivity.this,name==null?"无用户名":("name:"+name+" UUID:"+UUID), Toast.LENGTH_SHORT);
+            }
+        });
+
+        initKey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FileHelper fileHelper = new FileHelper(SettingsActivity.this);
+                PaillierKeyGenerator paillierKeyGenerator = new PaillierKeyGenerator(512,64);
+                PaillierPublicKey paillierPublicKey = paillierKeyGenerator.getPaillierPublicKey();
+                PaillierPrivateKey paillierPrivateKey = paillierKeyGenerator.getPaillierPrivateKey();
+                try {
+                    fileHelper.save("PAILLIER_PUBLIC_KEY",paillierPublicKey.getJsonStringPublicKey());
+                    fileHelper.save("PAILLIER_PRIVATE_KEY",paillierPrivateKey.getJsonStringPrivateKey());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

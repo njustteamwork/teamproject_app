@@ -11,7 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.dataprocessor.Collector;
+import com.example.myapplication.dataprocessor.DataForm;
+import com.example.myapplication.dataprocessor.PostData;
 import com.example.myapplication.ui.login.LoginActivity;
+import com.google.gson.Gson;
 
 import java.util.Random;
 
@@ -33,7 +37,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TestNum = new Random().nextInt(10000);
-                CustomToast.showToast(MainActivity.this,"数据就暂定为"+TestNum+"吧",Toast.LENGTH_SHORT);
+                //CustomToast.showToast(MainActivity.this,"数据就暂定为"+TestNum+"吧",Toast.LENGTH_SHORT);
+                Collector collector = new Collector(MainActivity.this);
+                DataForm df = collector.collectData();
+                Gson gson = new Gson();
+                String userJson = gson.toJson(df);
+                CustomToast.showToast(MainActivity.this,"数据就暂定为"+userJson+"吧",Toast.LENGTH_SHORT);
             }
         });
 

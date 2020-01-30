@@ -1,4 +1,6 @@
 package com.example.myapplication.paillier;
+import com.google.gson.Gson;
+
 import java.math.*;
 
 public class PaillierPublicKey {
@@ -6,6 +8,9 @@ public class PaillierPublicKey {
     private BigInteger nSquare;
     private BigInteger g;
     private int bitLength;
+    private String userName;
+    private Long timeStamp = System.currentTimeMillis();
+
     public PaillierPublicKey(BigInteger n, BigInteger g, int bitLength){
         this.n = n;
         nSquare = n.multiply(n);
@@ -17,5 +22,18 @@ public class PaillierPublicKey {
     public BigInteger getNSquare(){return nSquare;}
     public BigInteger getG(){return g;}
     public int getBitLength(){return bitLength;}
+    public Long getTimeStamp(){ return timeStamp; }
+    public String getUserName(){return userName;}
+
+    public String getJsonStringPublicKey(){
+        Gson gson = new Gson();
+        String jsonStringPublicKey = gson.toJson(this);
+        //System.out.println(jsonStringPublicKey);
+        return jsonStringPublicKey;
+    }
+
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
 
 }

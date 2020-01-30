@@ -24,5 +24,6 @@ public class PaillierTest {
         BigInteger multipleEm1M2 = calculator.multiplyIt(em1, m2);
         System.out.println("multipleEm1M2 is " + multipleEm1M2);
         System.out.println("After decrypted, multipleEm1M2 is " + decryptor.decryptIt(multipleEm1M2));
+        System.out.println(publicKey.getJsonStringPublicKey());
     }
 }

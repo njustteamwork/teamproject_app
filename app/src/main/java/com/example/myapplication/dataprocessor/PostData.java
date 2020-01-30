@@ -1,8 +1,9 @@
-package com.example.myapplication;
+package com.example.myapplication.dataprocessor;
 
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.myapplication.CustomToast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -10,11 +11,11 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import cz.msebera.android.httpclient.Header;
 
 public class PostData {
-    public static void postData(String myData, final Context myContext){
+    public static void postData(String myEncryptedData, final Context myContext){
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "http://10.0.2.2:8080/postData";
+        String url = "http://10.0.2.2:8080/postEData";
         RequestParams params = new RequestParams();
-        params.put("data",myData);
+        params.put("data",myEncryptedData);
         client.post(url, params, new TextHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
