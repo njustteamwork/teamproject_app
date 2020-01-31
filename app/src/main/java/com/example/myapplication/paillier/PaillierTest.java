@@ -18,12 +18,13 @@ public class PaillierTest {
         System.out.println("After decrypted, em1 is " + decryptor.decryptIt(em1).toString());
         System.out.println("After decrypted, em2 is " + decryptor.decryptIt(em2).toString());
         PaillierCalculator calculator = new PaillierCalculator(publicKey);
-        BigInteger sumEm1Em2 = calculator.addIt(em1,em2);
+        BigInteger sumEm1Em2 = calculator.add(em1,em2);
         System.out.println("em1 + em2 is "+sumEm1Em2.toString());
         System.out.println("After decrypted, em1 sum em2 is " + decryptor.decryptIt(sumEm1Em2).toString());
-        BigInteger multipleEm1M2 = calculator.multiplyIt(em1, m2);
+        BigInteger multipleEm1M2 = calculator.multiply(em1, m2);
         System.out.println("multipleEm1M2 is " + multipleEm1M2);
         System.out.println("After decrypted, multipleEm1M2 is " + decryptor.decryptIt(multipleEm1M2));
-        System.out.println(publicKey.getJsonStringPublicKey());
+        System.out.println("publicKey: " + publicKey.getJsonStringPublicKey());
+        System.out.println("privateKey: " + privateKey.getJsonStringPrivateKey());
     }
 }

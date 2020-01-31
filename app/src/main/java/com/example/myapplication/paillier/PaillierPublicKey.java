@@ -25,15 +25,20 @@ public class PaillierPublicKey {
     public Long getTimeStamp(){ return timeStamp; }
     public String getUserName(){return userName;}
 
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
+
+    public static PaillierPublicKey paillierJsonToPublicKey(String paillierPublicKey){
+        Gson gson = new Gson();
+        return gson.fromJson(paillierPublicKey,PaillierPublicKey.class);
+    }
+
     public String getJsonStringPublicKey(){
         Gson gson = new Gson();
         String jsonStringPublicKey = gson.toJson(this);
         //System.out.println(jsonStringPublicKey);
         return jsonStringPublicKey;
-    }
-
-    public void setUserName(String userName){
-        this.userName = userName;
     }
 
 }

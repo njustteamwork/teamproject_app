@@ -9,11 +9,11 @@ public class PaillierCalculator {
         nSquare = publicKey.getNSquare();
     }
 
-    public BigInteger addIt(BigInteger em1, BigInteger em2){
+    public BigInteger add(BigInteger em1, BigInteger em2){
         return em1.multiply(em2).mod(nSquare);
     }
 
-    public BigInteger multiplyIt(BigInteger em1, BigInteger m2){
+    public BigInteger multiply(BigInteger em1, BigInteger m2){
         return em1.modPow(m2,nSquare);
     }
 }
