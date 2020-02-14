@@ -20,6 +20,7 @@
             android:layout_marginTop="30dp"
             android:gravity="center"
             android:drawableBottom="@drawable/ic_local_hospital"
+            android:background="@drawable/button_press"
             ></TextView>
 
         <TextView

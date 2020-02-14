@@ -2,10 +2,14 @@ package com.example.myapplication.filehelper;
 
 import android.content.Context;
 
+import com.example.myapplication.dataprocessor.EncryptedDataForm;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.security.Key;
+import java.util.List;
 
 public class FileHelper {
 
@@ -30,6 +34,10 @@ public class FileHelper {
         FileOutputStream output = mContext.openFileOutput(filename, Context.MODE_PRIVATE);
         output.write(filecontent.getEncoded());
         output.close();         //关闭输出流
+    }
+
+    public void save(String filename, List<EncryptedDataForm> list){
+
     }
 
 

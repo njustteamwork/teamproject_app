@@ -10,6 +10,8 @@
     <string name="invalid_password">密码长度不得少于6个字符</string>
     <string name="login_failed">"登陆失败"</string>
     <string name="title_activity_settings">设置</string>
+    <string name="title_activity_test">测试</string>
+    <string name="title_extra_test">压力测试</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

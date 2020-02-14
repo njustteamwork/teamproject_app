@@ -3,10 +3,11 @@ package com.example.myapplication.dataprocessor;
 import com.example.myapplication.paillier.PaillierEncryptor;
 import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
-public class EncryptedDataForm {
+public class EncryptedDataForm implements Serializable {
     private Date date;
     private String username;
     private BigInteger userTemperature;
