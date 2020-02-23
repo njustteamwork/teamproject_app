@@ -48,11 +48,12 @@ public class DPTest {
         PaillierPublicKey paillierPublicKey = PaillierPublicKey.paillierJsonToPublicKey("{\"n\":7037996759611275900405487329144489085210900622405788623915340046554895678557675360099993502545810105916795350348201798995744651664108236879690390748857833,\"nSquare\":49533398388298819693190911443085500113137594389227717398938303574532356291531019850234314622241175041250992063305927006862844026670633749958420794136365527887009273250901790502746504678689585917463571409706569379921923499464969602901871572009667889989146252127852333968575165007138552703354893437794045455889,\"g\":47,\"bitLength\":512,\"timeStamp\":1580452220178}");
         PaillierEncryptor paillierEncryptor = new PaillierEncryptor(paillierPublicKey);
         List<EncryptedDataForm> list = new ArrayList<>();
+
         int originHeartRate  = 90;
         int originTemperature = 360;
         int timeToTry = 3000;
         int timeToSleep = 1200;
-        /*
+
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("test_list"));
         for(int s = 0;s<timeToTry;s++){
             DataForm df = new DataForm();
@@ -69,7 +70,7 @@ public class DPTest {
         list.toArray(array);
         out.writeObject(array);
         out.close();
-         */
+
         ObjectInputStream in = new ObjectInputStream(new FileInputStream("test_list"));
         EncryptedDataForm[] array1 = (EncryptedDataForm[]) in.readObject();
         List<EncryptedDataForm> list1 = Arrays.asList(array1);

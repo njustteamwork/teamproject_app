@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.MenuItem;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -10,7 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.dataprocessor.DataForm;
 import com.example.myapplication.dataprocessor.EncryptedDataForm;
+import com.example.myapplication.dataprocessor.PostData;
+import com.example.myapplication.paillier.PaillierEncryptor;
+import com.example.myapplication.paillier.PaillierPublicKey;
 import com.google.gson.Gson;
 
 import java.io.FileInputStream;
@@ -19,62 +25,73 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class ExtraTestActivity extends AppCompatActivity {
+
+    static Random r = new Random();
+    public static String getName(){
+        int number = r.nextInt(3);
+        switch(number){
+            case 0: return "Alex";
+            case 1: return "Leo";
+            case 2: return "Carl";
+        }
+        return null;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extratest);
 
 
-        Thread thread = new Thread() {
+        final TextView textView = findViewById(R.id.extra_tv);
+        textView.setText("压力测试中……");
+
+        final Thread thread = new Thread(){
             public void run() {
-                TextView textView = findViewById(R.id.extra_tv);
-
-                /*
-                try {
-
-                    InputStream in = getResources().openRawResource(R.raw.test_list);
-                    FileOutputStream output = null;
-                    output = ExtraTestActivity.this.openFileOutput("TEST_LIST", Context.MODE_PRIVATE);
-                    byte[] data = new byte[1024];
-                    int inData = in.read(data);
-                    while (inData != -1) {
-                        output.write(data, 0, inData);
-                        inData = in.read(data);
-                    }
-                    output.close();
-                    in.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                 */
-
-                ObjectInputStream oin = null;
-                EncryptedDataForm[] array1 = null;
+                Looper.prepare();
                 Gson gson = new Gson();
-                ScrollView scrollView = findViewById(R.id.sv);
-                try {
-                    oin = new ObjectInputStream(ExtraTestActivity.this.openFileInput("TEST_LIST"));
-                    array1 = (EncryptedDataForm[]) oin.readObject();
-                    List<EncryptedDataForm> list1 = Arrays.asList(array1);
-                    int count = 0;
-                    for (EncryptedDataForm edf : list1) {
-                        String ts = gson.toJson(edf) + "   " + count++;
-                        System.out.println(ts);
-                        textView.append(count+"   " + ts +  "\n");
-                        Thread.sleep(30);
-                        if(count%3==0)
-                            textView.setText("");
+                String eUserJson;
+                PaillierPublicKey paillierPublicKey = PaillierPublicKey.paillierJsonToPublicKey("{\"n\":7037996759611275900405487329144489085210900622405788623915340046554895678557675360099993502545810105916795350348201798995744651664108236879690390748857833,\"nSquare\":49533398388298819693190911443085500113137594389227717398938303574532356291531019850234314622241175041250992063305927006862844026670633749958420794136365527887009273250901790502746504678689585917463571409706569379921923499464969602901871572009667889989146252127852333968575165007138552703354893437794045455889,\"g\":47,\"bitLength\":512,\"timeStamp\":1580452220178}");
+                PaillierEncryptor paillierEncryptor = new PaillierEncryptor(paillierPublicKey);
+                List<EncryptedDataForm> list = new ArrayList<>();
+                int originHeartRate  = 90;
+                int originTemperature = 360;
+                int timeToTry = 100;
+                int timeToSleep = 3000;
+
+                for(int s = 0;s<timeToTry;s++){
+                    DataForm df = new DataForm();
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.add(Calendar.DAY_OF_MONTH,-ExtraTestActivity.r.nextInt(14));
+                    Date date = calendar.getTime();
+                    df.setDate(date);
+                    df.setUserName(ExtraTestActivity.getName());
+                    df.setUserHeartRate(originHeartRate+r.nextInt(11));
+                    df.setUserTemperature(originTemperature+r.nextInt(11));
+                    try {
+                        Thread.sleep(timeToSleep);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    EncryptedDataForm edf = new EncryptedDataForm(df,paillierEncryptor);
+                    eUserJson = gson.toJson(edf);
+                    System.out.println("post eUserData: " + eUserJson);
+                    PostData.postData(eUserJson,ExtraTestActivity.this);
                 }
+                textView.setText("压力测试完成");
+                Looper.loop();
             }
         };
         thread.start();
+
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -87,6 +104,7 @@ public class ExtraTestActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
+
                 return true;
         }
         return super.onOptionsItemSelected(item);

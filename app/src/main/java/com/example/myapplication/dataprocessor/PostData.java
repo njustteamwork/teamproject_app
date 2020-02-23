@@ -13,7 +13,7 @@ import cz.msebera.android.httpclient.Header;
 public class PostData {
     public static void postData(String myEncryptedData, final Context myContext){
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "http://10.0.2.2:8080/postEData";
+        String url = "http://10.0.2.2:8080/data/postEData";
         RequestParams params = new RequestParams();
         params.put("data",myEncryptedData);
         client.post(url, params, new TextHttpResponseHandler() {
