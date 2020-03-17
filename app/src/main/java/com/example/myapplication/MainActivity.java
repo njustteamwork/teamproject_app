@@ -2,8 +2,12 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cunoraz.gifview.library.GifView;
-import com.example.myapplication.ui.login.LoginActivity;
+import com.example.myapplication.dataprocessor.HTTPRequest;
+import com.example.myapplication.login.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         gifView.setGifResource(R.mipmap.main_gif);
+        HTTPRequest.setFogUrl(MainActivity.this);
     }
 
     @Override

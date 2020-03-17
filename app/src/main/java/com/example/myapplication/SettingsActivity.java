@@ -11,8 +11,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
-import com.example.myapplication.data.LoginDataSource;
-import com.example.myapplication.data.LoginRepository;
+import com.example.myapplication.login.data.LoginDataSource;
 import com.example.myapplication.filehelper.FileHelper;
 import com.example.myapplication.paillier.PaillierKeyGenerator;
 import com.example.myapplication.paillier.PaillierPrivateKey;

@@ -3,9 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,13 +13,10 @@ import android.widget.Toast;
 import com.example.myapplication.dataprocessor.Collector;
 import com.example.myapplication.dataprocessor.DataForm;
 import com.example.myapplication.dataprocessor.EncryptedDataForm;
-import com.example.myapplication.dataprocessor.PostData;
+import com.example.myapplication.dataprocessor.HTTPRequest;
 import com.example.myapplication.paillier.PaillierEncryptor;
 import com.example.myapplication.paillier.PaillierPublicKey;
-import com.example.myapplication.ui.login.LoginActivity;
 import com.google.gson.Gson;
-
-import java.util.Random;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -74,7 +69,7 @@ public class TestActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PostData.postData(gson.toJson(encryptedDataForm),TestActivity.this);
+                HTTPRequest.postData(gson.toJson(encryptedDataForm),TestActivity.this);
             }
         });
 

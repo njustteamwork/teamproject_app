@@ -1,4 +1,4 @@
-package com.example.myapplication.data.model;
+package com.example.myapplication.login.data.model;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

@@ -1,22 +1,11 @@
-package com.example.myapplication.data;
+package com.example.myapplication.login.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.myapplication.data.model.LoggedInUser;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.TextHttpResponseHandler;
+import com.example.myapplication.login.data.model.LoggedInUser;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-
-import cz.msebera.android.httpclient.Header;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.

@@ -1,9 +1,9 @@
-package com.example.myapplication.data;
+package com.example.myapplication.login.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.myapplication.data.model.LoggedInUser;
+import com.example.myapplication.login.data.model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

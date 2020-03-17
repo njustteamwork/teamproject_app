@@ -1,4 +1,4 @@
-package com.example.myapplication.data;
+package com.example.myapplication.login.data;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
