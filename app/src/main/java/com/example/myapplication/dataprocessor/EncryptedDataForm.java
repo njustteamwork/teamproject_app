@@ -12,12 +12,14 @@ public class EncryptedDataForm implements Serializable {
     private String username;
     private BigInteger userTemperature;
     private BigInteger userHeartRate;
+    private long keyTimeStamp;
 
     public EncryptedDataForm(DataForm dataForm, PaillierEncryptor paillierEncryptor){
         date = dataForm.getDate();
         username = dataForm.getUserName();
         userTemperature = paillierEncryptor.encryptIt(dataForm.getUserTemperature());
         userHeartRate = paillierEncryptor.encryptIt(dataForm.getUserHeartRate());
+        keyTimeStamp = paillierEncryptor.getKeyTimeStamp();
     }
 
     public String getJsonStringEDataForm(){

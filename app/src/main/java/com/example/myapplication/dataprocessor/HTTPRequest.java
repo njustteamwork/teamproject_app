@@ -2,7 +2,6 @@ package com.example.myapplication.dataprocessor;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.provider.ContactsContract;
 import android.widget.Toast;
 
 import com.example.myapplication.CustomToast;
@@ -16,8 +15,9 @@ import cz.msebera.android.httpclient.Header;
 
 public class HTTPRequest {
     private static AsyncHttpClient client = new AsyncHttpClient();
+
     public static void postData(String myEncryptedData, final Context myContext){
-        SharedPreferences sp =  myContext.getSharedPreferences("forUrl",Context.MODE_PRIVATE);
+        SharedPreferences sp =  myContext.getSharedPreferences("fogUrl",Context.MODE_PRIVATE);
         String url = null;
         if(sp.contains("url"))
              url = sp.getString("url",null)+"/data/postEData";
@@ -32,6 +32,8 @@ public class HTTPRequest {
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 CustomToast.showToast(myContext,"Success", Toast.LENGTH_SHORT);
                 System.out.println(responseString);
+                if(responseString.equals("WKTS"))
+                    HTTPRequest.setPublicKey(myContext);
             }
 
             @Override
@@ -49,7 +51,7 @@ public class HTTPRequest {
                 SharedPreferences sp = myContext.getSharedPreferences("fogUrl",myContext.MODE_PRIVATE);
                 sp.edit().clear().apply();
                 CustomToast.showToast(myContext,"请求雾节点地址失败！代码"+statusCode, Toast.LENGTH_SHORT);
-                System.out.println("失败？？？");
+                System.out.println("请求雾节点地址失败？？？");
             }
 
             @Override
@@ -59,6 +61,25 @@ public class HTTPRequest {
                 sp.edit().clear().apply();
                 sp.edit().putString("url",responseString).putString("date",new Date().toString()).apply();
                 System.out.println("sp存储地址"+ sp.getString("url",null));
+            }
+        });
+    }
+
+    public static void setPublicKey(final Context myContext){
+        String url = "http://10.0.2.2:8081/data/getPublicKey"; //云服务器地址
+        client.post(url, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                CustomToast.showToast(myContext,"获取密钥失败！",Toast.LENGTH_SHORT);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                System.out.println(responseString);
+                CustomToast.showToast(myContext,"获取密钥成功！",Toast.LENGTH_SHORT);
+                SharedPreferences sp = myContext.getSharedPreferences("publicKey",myContext.MODE_PRIVATE);
+                sp.edit().clear().apply();
+                sp.edit().putString("keyString",responseString).apply();
             }
         });
     }

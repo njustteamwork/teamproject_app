@@ -11,12 +11,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.example.myapplication.dataprocessor.HTTPRequest;
 import com.example.myapplication.login.data.LoginDataSource;
-import com.example.myapplication.filehelper.FileHelper;
-import com.example.myapplication.paillier.PaillierKeyGenerator;
-import com.example.myapplication.paillier.PaillierPrivateKey;
-import com.example.myapplication.paillier.PaillierPublicKey;
-
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
@@ -40,7 +36,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new LoginDataSource().logout(SettingsActivity.this);
-                CustomToast.showToast(SettingsActivity.this,"You clicked the clearUserDataButton",Toast.LENGTH_SHORT);
+                CustomToast.showToast(SettingsActivity.this,"数据已清除",Toast.LENGTH_SHORT);
             }
         });
 
@@ -57,16 +53,10 @@ public class SettingsActivity extends AppCompatActivity {
         initKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FileHelper fileHelper = new FileHelper(SettingsActivity.this);
-                PaillierKeyGenerator paillierKeyGenerator = new PaillierKeyGenerator(512,64);
-                PaillierPublicKey paillierPublicKey = paillierKeyGenerator.getPaillierPublicKey();
-                PaillierPrivateKey paillierPrivateKey = paillierKeyGenerator.getPaillierPrivateKey();
-                try {
-                    fileHelper.save("PAILLIER_PUBLIC_KEY",paillierPublicKey.getJsonStringPublicKey());
-                    fileHelper.save("PAILLIER_PRIVATE_KEY",paillierPrivateKey.getJsonStringPrivateKey());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                SharedPreferences sp = getSharedPreferences("publicKey",MODE_PRIVATE);
+                HTTPRequest.setPublicKey(SettingsActivity.this);
+                System.out.println(sp.getString("keyString",null));
+                CustomToast.showToast(SettingsActivity.this,"已更新密钥", Toast.LENGTH_SHORT);
             }
         });
     }

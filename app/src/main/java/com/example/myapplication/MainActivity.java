@@ -2,12 +2,9 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         });
         gifView.setGifResource(R.mipmap.main_gif);
         HTTPRequest.setFogUrl(MainActivity.this);
+        SharedPreferences sp = getSharedPreferences("publicKey",MODE_PRIVATE);
+        if(!sp.contains("keyString"))
+            HTTPRequest.setPublicKey(this);
     }
 
     @Override

@@ -56,13 +56,16 @@ public class ExtraTestActivity extends AppCompatActivity {
                     Looper.prepare();
                     Gson gson = new Gson();
                     String eUserJson;
-                    PaillierPublicKey paillierPublicKey = PaillierPublicKey.paillierJsonToPublicKey("{\"n\":7037996759611275900405487329144489085210900622405788623915340046554895678557675360099993502545810105916795350348201798995744651664108236879690390748857833,\"nSquare\":49533398388298819693190911443085500113137594389227717398938303574532356291531019850234314622241175041250992063305927006862844026670633749958420794136365527887009273250901790502746504678689585917463571409706569379921923499464969602901871572009667889989146252127852333968575165007138552703354893437794045455889,\"g\":47,\"bitLength\":512,\"timeStamp\":1580452220178}");
+                    SharedPreferences sp = getSharedPreferences("publicKey",MODE_PRIVATE);
+                    if(!sp.contains("keyString"))
+                        HTTPRequest.setPublicKey(ExtraTestActivity.this);
+                    PaillierPublicKey paillierPublicKey = PaillierPublicKey.paillierJsonToPublicKey(sp.getString("keyString",null));
                     PaillierEncryptor paillierEncryptor = new PaillierEncryptor(paillierPublicKey);
                     List<EncryptedDataForm> list = new ArrayList<>();
                     int originHeartRate  = 90;
                     int originTemperature = 360;
                     int timeToTry = 100;
-                    int timeToSleep = 3000;
+                    int timeToSleep = 1000;
 
                     for(int s = 0;s<timeToTry;s++){
                         DataForm df = new DataForm();

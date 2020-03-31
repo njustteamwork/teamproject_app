@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,8 +58,11 @@ public class TestActivity extends AppCompatActivity {
                     CustomToast.showToast(TestActivity.this,"请先获取数据！",Toast.LENGTH_SHORT);
                     return;
                 }
-
-                PaillierPublicKey paillierPublicKey = PaillierPublicKey.paillierJsonToPublicKey("{\"n\":7037996759611275900405487329144489085210900622405788623915340046554895678557675360099993502545810105916795350348201798995744651664108236879690390748857833,\"nSquare\":49533398388298819693190911443085500113137594389227717398938303574532356291531019850234314622241175041250992063305927006862844026670633749958420794136365527887009273250901790502746504678689585917463571409706569379921923499464969602901871572009667889989146252127852333968575165007138552703354893437794045455889,\"g\":47,\"bitLength\":512,\"timeStamp\":1580452220178}");
+                //PaillierPublicKey paillierPublicKey = PaillierPublicKey.paillierJsonToPublicKey("{\"n\":7037996759611275900405487329144489085210900622405788623915340046554895678557675360099993502545810105916795350348201798995744651664108236879690390748857833,\"nSquare\":49533398388298819693190911443085500113137594389227717398938303574532356291531019850234314622241175041250992063305927006862844026670633749958420794136365527887009273250901790502746504678689585917463571409706569379921923499464969602901871572009667889989146252127852333968575165007138552703354893437794045455889,\"g\":47,\"bitLength\":512,\"timeStamp\":1580452220178}");
+                SharedPreferences sp = getSharedPreferences("publicKey",MODE_PRIVATE);
+                if(!sp.contains("keyString"))
+                    HTTPRequest.setPublicKey(TestActivity.this);
+                PaillierPublicKey paillierPublicKey = PaillierPublicKey.paillierJsonToPublicKey(sp.getString("keyString",null));
                 PaillierEncryptor paillierEncryptor = new PaillierEncryptor(paillierPublicKey);
                 encryptedDataForm = new EncryptedDataForm(df,paillierEncryptor);
                 System.out.println(gson.toJson(encryptedDataForm));

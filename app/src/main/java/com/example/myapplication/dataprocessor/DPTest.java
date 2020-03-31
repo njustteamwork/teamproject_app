@@ -1,8 +1,6 @@
 package com.example.myapplication.dataprocessor;
 
-import com.example.myapplication.paillier.PaillierCalculator;
 import com.example.myapplication.paillier.PaillierEncryptor;
-import com.example.myapplication.paillier.PaillierKeyGenerator;
 import com.example.myapplication.paillier.PaillierPublicKey;
 import com.google.gson.Gson;
 
@@ -51,8 +49,8 @@ public class DPTest {
 
         int originHeartRate  = 90;
         int originTemperature = 360;
-        int timeToTry = 3000;
-        int timeToSleep = 1200;
+        int timeToTry = 10;
+        int timeToSleep = 100;
 
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("test_list"));
         for(int s = 0;s<timeToTry;s++){

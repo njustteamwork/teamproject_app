@@ -20,4 +20,8 @@ public class PaillierEncryptor {
         BigInteger m = BigInteger.valueOf(intM);
         return publicKey.getG().modPow(m, publicKey.getNSquare()).multiply(r.modPow(publicKey.getN(), publicKey.getNSquare())).mod(publicKey.getNSquare());
     }
+
+    public long getKeyTimeStamp(){
+        return publicKey.getTimeStamp();
+    }
 }
