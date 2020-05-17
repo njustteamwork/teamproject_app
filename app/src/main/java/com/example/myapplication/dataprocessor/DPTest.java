@@ -13,6 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * 测试类
+ */
 public class DPTest {
     static Random r = new Random();
     public static String getName(){

@@ -2,6 +2,9 @@ package com.example.myapplication.dataprocessor;
 
 import java.util.Date;
 
+/**
+ * android端收集到的数据类
+ */
 public class DataForm {
     private Date date = new Date();// 获取当前时间
     private String userName;

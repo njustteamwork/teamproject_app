@@ -7,6 +7,9 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
+/**
+ * 加密后的数据实体类
+ */
 public class EncryptedDataForm implements Serializable {
     private Date date;
     private String username;

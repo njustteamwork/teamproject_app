@@ -19,6 +19,9 @@ import com.example.myapplication.paillier.PaillierEncryptor;
 import com.example.myapplication.paillier.PaillierPublicKey;
 import com.google.gson.Gson;
 
+/**
+ * 测试Activity
+ */
 public class TestActivity extends AppCompatActivity {
 
     String userJson = null;
@@ -39,8 +42,11 @@ public class TestActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-
         TextView hospital_icon = findViewById(R.id.hospital_icon);
+
+        /**
+         * 获取一个数据
+         */
         getButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +57,9 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * 加密数据
+         */
         doButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +79,9 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * 发送数据
+         */
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +89,9 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * 装一下
+         */
         hospital_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

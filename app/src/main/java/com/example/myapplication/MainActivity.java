@@ -16,6 +16,7 @@ import com.cunoraz.gifview.library.GifView;
 import com.example.myapplication.dataprocessor.HTTPRequest;
 import com.example.myapplication.login.ui.login.LoginActivity;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private int COUNTS = 5;// 点击次数
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
                 //获得当前系统已经启动的时间
                 mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+                //如果快速点击5次，就跳转到压力测试activity
                 if (mHits[0] >= (SystemClock.uptimeMillis() - DURATION)) {
                     // 相关逻辑操作
                     //CustomToast.showToast(MainActivity.this, "快速点击5次！", Toast.LENGTH_SHORT);

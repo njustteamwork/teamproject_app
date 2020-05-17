@@ -3,6 +3,9 @@ package com.example.myapplication;
 import android.content.Context;
 import android.widget.Toast;
 
+/**
+ * 自定义androidToast
+ */
 public class CustomToast {
     private static Toast mToast;
 

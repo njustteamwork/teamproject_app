@@ -32,6 +32,9 @@ public class SettingsActivity extends AppCompatActivity {
         Button showUserData = findViewById(R.id.showUserData);
         Button initKey = findViewById(R.id.initKey);
 
+        /**
+         * 清除登录数据
+         */
         clearUserData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,6 +43,9 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * 显示登录信息
+         */
         showUserData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +56,9 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * 更新密钥
+         */
         initKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

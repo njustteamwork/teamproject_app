@@ -11,6 +11,9 @@ import java.io.ObjectOutputStream;
 import java.security.Key;
 import java.util.List;
 
+/**
+ * 文件读写工具类
+ */
 public class FileHelper {
 
     private Context mContext;

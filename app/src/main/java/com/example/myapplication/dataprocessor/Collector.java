@@ -6,9 +6,9 @@ import android.content.SharedPreferences;
 import static android.content.Context.MODE_PRIVATE;
 
 public class Collector {
-    /**
-     * 应用Android传感器收集所需信息
-     */
+
+     //TODO 应用Android传感器收集所需信息
+
     Context mContext;
     DataForm df = new DataForm();
 

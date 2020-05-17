@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+//数据传输压力测试Activity
 public class ExtraTestActivity extends AppCompatActivity {
 
     static Random r = new Random();

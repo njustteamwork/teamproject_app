@@ -13,9 +13,17 @@ import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
+/**
+ * HTTP请求工具类
+ */
 public class HTTPRequest {
     private static AsyncHttpClient client = new AsyncHttpClient();
 
+    /**
+     * 向雾节点发送数据
+     * @param myEncryptedData 加密后的数据
+     * @param myContext
+     */
     public static void postData(String myEncryptedData, final Context myContext){
         SharedPreferences sp =  myContext.getSharedPreferences("fogUrl",Context.MODE_PRIVATE);
         String url = null;
@@ -31,7 +39,7 @@ public class HTTPRequest {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 CustomToast.showToast(myContext,"Success", Toast.LENGTH_SHORT);
-                System.out.println(responseString);
+                System.out.println("雾节点返回信息："+responseString);
                 if(responseString.equals("WKTS"))
                     HTTPRequest.setPublicKey(myContext);
             }
@@ -43,6 +51,10 @@ public class HTTPRequest {
         });
     }
 
+    /**
+     * 设置雾节点地址
+     * @param myContext
+     */
     public static void setFogUrl(final Context myContext){
         String url = "http://10.0.2.2:8081/data/getFogUrl"; //云服务器地址
         client.post(url, new TextHttpResponseHandler() {
@@ -65,6 +77,10 @@ public class HTTPRequest {
         });
     }
 
+    /**
+     * 设置同态加密公钥
+     * @param myContext
+     */
     public static void setPublicKey(final Context myContext){
         String url = "http://10.0.2.2:8081/data/getPublicKey"; //云服务器地址
         client.post(url, new TextHttpResponseHandler() {
