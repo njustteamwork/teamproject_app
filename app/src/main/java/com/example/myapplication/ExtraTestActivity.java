@@ -37,6 +37,7 @@ public class ExtraTestActivity extends AppCompatActivity {
         }
         return null;
     }
+    Boolean exit = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class ExtraTestActivity extends AppCompatActivity {
             final Thread thread = new Thread(){
                 public void run() {
                     Looper.prepare();
+                    exit = false;
                     Gson gson = new Gson();
                     String eUserJson;
                     SharedPreferences sp = getSharedPreferences("publicKey",MODE_PRIVATE);
@@ -65,10 +67,11 @@ public class ExtraTestActivity extends AppCompatActivity {
                     List<EncryptedDataForm> list = new ArrayList<>();
                     int originHeartRate  = 90;
                     int originTemperature = 360;
-                    int timeToTry = 100;
+                    int timeToTry = 500;
                     int timeToSleep = 1000;
 
                     for(int s = 0;s<timeToTry;s++){
+                        if(exit == true) break;
                         DataForm df = new DataForm();
                         Calendar calendar = Calendar.getInstance();
                         calendar.add(Calendar.DAY_OF_MONTH,-ExtraTestActivity.r.nextInt(14));
@@ -104,6 +107,7 @@ public class ExtraTestActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                exit = true;
                 this.finish();
 
                 return true;

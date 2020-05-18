@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         });
         gifView.setGifResource(R.mipmap.main_gif);
         HTTPRequest.setFogUrl(MainActivity.this);
+        HTTPRequest.setPublicKey(MainActivity.this);
         SharedPreferences sp = getSharedPreferences("publicKey",MODE_PRIVATE);
         if(!sp.contains("keyString"))
             HTTPRequest.setPublicKey(this);

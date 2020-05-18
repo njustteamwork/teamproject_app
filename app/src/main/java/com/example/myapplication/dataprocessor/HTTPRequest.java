@@ -38,10 +38,12 @@ public class HTTPRequest {
         client.post(url, params, new TextHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                CustomToast.showToast(myContext,"Success", Toast.LENGTH_SHORT);
                 System.out.println("雾节点返回信息："+responseString);
-                if(responseString.equals("WKTS"))
+                if(responseString.equals("WKTS")){
                     HTTPRequest.setPublicKey(myContext);
+                    CustomToast.showToast(myContext,"密钥已过期，请返回后重新进入此界面进行测试。 "+ statusCode, Toast.LENGTH_SHORT);
+                }
+
             }
 
             @Override

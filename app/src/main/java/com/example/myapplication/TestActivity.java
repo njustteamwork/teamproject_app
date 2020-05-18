@@ -74,7 +74,7 @@ public class TestActivity extends AppCompatActivity {
                 PaillierPublicKey paillierPublicKey = PaillierPublicKey.paillierJsonToPublicKey(sp.getString("keyString",null));
                 PaillierEncryptor paillierEncryptor = new PaillierEncryptor(paillierPublicKey);
                 encryptedDataForm = new EncryptedDataForm(df,paillierEncryptor);
-                System.out.println(gson.toJson(encryptedDataForm));
+                System.out.println("加密后的数据：" + gson.toJson(encryptedDataForm));
                 CustomToast.showToast(TestActivity.this,"数据已加密！",Toast.LENGTH_SHORT);
             }
         });
@@ -85,6 +85,10 @@ public class TestActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (encryptedDataForm == null){
+                    CustomToast.showToast(TestActivity.this,"请先获取数据并加密！",Toast.LENGTH_SHORT);
+                    return;
+                }
                 HTTPRequest.postData(gson.toJson(encryptedDataForm),TestActivity.this);
             }
         });
