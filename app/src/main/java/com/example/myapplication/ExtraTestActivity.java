@@ -68,11 +68,13 @@ public class ExtraTestActivity extends AppCompatActivity {
                     int originHeartRate  = 90;
                     int originTemperature = 360;
                     int timeToTry = 500;
-                    int timeToSleep = 1000;
+                    int timeToSleep = 20;
 
                     for(int s = 0;s<timeToTry;s++){
                         if(exit) break;
-                        textView.setText("压力测试中……"+ "("+ s + "/" + 500 +")" );
+                        textView.setText("压力测试中……"+ "("+ s + "/" + 500 +")\n" );
+                        textView.append("timeToTry: " +timeToTry + "\n");
+                        textView.append("timeToSleep: "+ timeToSleep + "ms"+ "\n");
                         DataForm df = new DataForm();
                         Calendar calendar = Calendar.getInstance();
                         calendar.add(Calendar.DAY_OF_MONTH,-ExtraTestActivity.r.nextInt(14));
