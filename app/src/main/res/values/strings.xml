@@ -14,7 +14,7 @@
     <string name="title_extra_test">压力测试</string>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
+    <string name="test_setting_header">压力测试设置</string>
     <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->

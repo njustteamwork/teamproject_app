@@ -52,7 +52,7 @@ public class ExtraTestActivity extends AppCompatActivity {
             HTTPRequest.setFogUrl(ExtraTestActivity.this);
         }
         else {
-            textView.setText("压力测试中……");
+            textView.setText("压力测试中……"+ "");
             final Thread thread = new Thread(){
                 public void run() {
                     Looper.prepare();
@@ -71,7 +71,8 @@ public class ExtraTestActivity extends AppCompatActivity {
                     int timeToSleep = 1000;
 
                     for(int s = 0;s<timeToTry;s++){
-                        if(exit == true) break;
+                        if(exit) break;
+                        textView.setText("压力测试中……"+ "("+ s + "/" + 500 +")" );
                         DataForm df = new DataForm();
                         Calendar calendar = Calendar.getInstance();
                         calendar.add(Calendar.DAY_OF_MONTH,-ExtraTestActivity.r.nextInt(14));
