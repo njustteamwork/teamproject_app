@@ -20,7 +20,7 @@
             android:layout_marginTop="30dp"
             android:gravity="center"
             android:drawableBottom="@drawable/ic_local_hospital"
-            android:background="@drawable/button_press"></TextView>
+            android:background="@drawable/button_press"/>
 
         <TextView
             android:id="@+id/title_text"
@@ -48,7 +48,8 @@
             android:layout_height="60dp"
             android:background="@drawable/main_button_blue"
             android:text="获取数据"
-            android:textColor="#FFFFFF">
+            android:textColor="#FFFFFF"
+            android:textSize="20sp">
         </Button>
 
         <Button
@@ -58,6 +59,7 @@
             android:background="@drawable/main_button_blue"
             android:text="加密数据"
             android:textColor="#FFFFFF"
+            android:textSize="20sp"
             android:layout_marginTop="20dp"
             android:layout_below="@id/getButton">
         </Button>
@@ -69,6 +71,7 @@
             android:background="@drawable/main_button_blue"
             android:text="发送数据"
             android:textColor="#FFFFFF"
+            android:textSize="20sp"
             android:layout_marginTop="20dp"
             android:layout_below="@id/doButton">
         </Button>

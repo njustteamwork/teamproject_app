@@ -74,7 +74,7 @@ public class HTTPRequest {
                 SharedPreferences sp = myContext.getSharedPreferences("fogUrl",myContext.MODE_PRIVATE);
                 sp.edit().clear().apply();
                 sp.edit().putString("url",responseString).putString("date",new Date().toString()).apply();
-                System.out.println("sp存储地址"+ sp.getString("url",null));
+                System.out.println("sp存储地址："+ sp.getString("url",null));
             }
         });
     }

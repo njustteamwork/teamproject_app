@@ -52,7 +52,7 @@ public class ExtraTestActivity extends AppCompatActivity {
             HTTPRequest.setFogUrl(ExtraTestActivity.this);
         }
         else {
-            textView.setText("压力测试中……"+ "");
+            textView.setText("连续测试中……"+ "");
             final Thread thread = new Thread(){
                 public void run() {
                     Looper.prepare();
@@ -68,11 +68,11 @@ public class ExtraTestActivity extends AppCompatActivity {
                     int originHeartRate  = 90;
                     int originTemperature = 360;
                     int timeToTry = 500;
-                    int timeToSleep = 20;
+                    int timeToSleep = 50;
 
                     for(int s = 0;s<timeToTry;s++){
                         if(exit) break;
-                        textView.setText("压力测试中……"+ "("+ s + "/" + 500 +")\n" );
+                        textView.setText("压力测试中……"+ "("+ s + "/" + timeToTry +")\n" );
                         textView.append("timeToTry: " +timeToTry + "\n");
                         textView.append("timeToSleep: "+ timeToSleep + "ms"+ "\n");
                         DataForm df = new DataForm();
